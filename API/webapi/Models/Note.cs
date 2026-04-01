@@ -1,11 +1,10 @@
-﻿namespace webapi.Models
+namespace webapi.Models
 {
-    public class User
+    public class Note
     {
         public int Id { get; set; }
-        public string? Email { get; set; }
-        public string? Password { get; set; }
-        public string? Role { get; set; }
+        public string? Title { get; set; }
+        public string? Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<UserNote> UserNotes { get; set; } = new List<UserNote>();
     }
