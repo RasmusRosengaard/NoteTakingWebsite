@@ -4,7 +4,7 @@
     <ul class="nav-left">
       <li><router-link to="/">Front page</router-link></li>
       <template v-if="loggedIn">
-        <li><router-link to="/dashboard">Dashboard</router-link></li>
+        <li><router-link to="/notes">Notes</router-link></li>
       </template>
     </ul>
 

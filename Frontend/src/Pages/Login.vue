@@ -30,7 +30,7 @@ function login() {
                 const user = parseJwt(data.token);
                 console.log('Logged-in user:', user);
 
-                router.push('/dashboard');
+                router.push('/');
             }
         })
         .catch(err => {

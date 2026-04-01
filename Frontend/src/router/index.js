@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Dashboard from '../Pages/Dashboard.vue';
+import Notes from '../Pages/Notes.vue';
 import Login from '../Pages/Login.vue';
 import Register from '@/Pages/Register.vue';
 import FrontPage from '@/Pages/FrontPage.vue';
 
 const routes = [
     {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
+        path: '/notes',
+        name: 'Notes',
+        component: Notes,
         meta: { requiresAuth: true } 
     },
     {

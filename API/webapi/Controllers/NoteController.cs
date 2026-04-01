@@ -14,12 +14,10 @@ namespace webapi.Controllers
     public class NoteController : ControllerBase
     {
         private readonly INoteRepository _noteRepository;
-        private readonly IConfiguration _configuration;
 
-        public NoteController(INoteRepository noteRepository, IConfiguration configuration)
+        public NoteController(INoteRepository noteRepository)
         {
             _noteRepository = noteRepository;
-            _configuration = configuration;
         }
 
         [HttpGet("{id}")]

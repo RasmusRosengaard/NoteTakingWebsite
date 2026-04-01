@@ -25,7 +25,7 @@ function register() {
         .then(data => {
             if (data?.token) {
                 localStorage.setItem('token', data.token);
-                router.push('/dashboard');
+                router.push('/');
             }
         })
         .catch(err => {
