@@ -28,8 +28,8 @@ npm run dev
 
 ## Core Note Features
 
-### Snapping Logic
-Implement grid-snapping for cleaner note alignment and organization.
+### Snapping List logic
+Implement list snapping for the content inside a note.
 
 ### Note Titles
 Add the ability to toggle optional titles/headers for individual notes.
@@ -43,6 +43,7 @@ Support for uploading custom cover images or selecting from a preset gallery for
 
 ### Search based on name (already implemented)
 Search functionality to search by canvas name.
+
 ### Advanced Filtering
 Sort canvases by name (alphabetical) or by the number of notes they contain.
 
