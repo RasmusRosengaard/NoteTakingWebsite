@@ -16,11 +16,11 @@ Make sure your frontend runs on the port defined in `Program.cs` to allow it to 
 
 ### Backend
 Navigate to the `webapi/` folder and run:
-```bash
 dotnet run
-´´´´
 
-
+### Backend
+Navigate to the `frontend/` folder and run:
+npm run dev
 
 
 
