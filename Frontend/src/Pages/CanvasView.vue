@@ -236,7 +236,6 @@ async function saveAllNotes() {
 .note-box:hover .delete-note-btn { display: flex; }
 .delete-note-btn:hover { background: #fee2e2; }
 
-/* Minimal resize handle */
 .resize-handle-br { 
   position: absolute; 
   bottom: 0; 
@@ -248,7 +247,6 @@ async function saveAllNotes() {
   border-radius: 0 0 12px 0;
 }
 
-/* Buttons */
 .btn-primary { background: var(--primary); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; }
 .btn-secondary { background: white; color: var(--text-main); border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; margin-right: 10px; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
