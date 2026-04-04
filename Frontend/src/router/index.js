@@ -4,7 +4,8 @@ import Login from '../Pages/Login.vue';
 import Register from '@/Pages/Register.vue';
 import FrontPage from '@/Pages/FrontPage.vue';
 import CanvasDashboard from '../Pages/CanvasDashboard.vue';
-import CanvasView from '../Pages/CanvasView.vue'; // new page for individual canvas
+import CanvasView from '../Pages/CanvasView.vue'; 
+import { parseJwt, isTokenExpired } from '@/Services/JWTService';
 
 const routes = [
   {
@@ -14,7 +15,7 @@ const routes = [
     meta: { requiresAuth: true } 
   },
   {
-    path: '/canvas/:canvasId',      // <--- dynamic route
+    path: '/canvas/:canvasId',      
     name: 'CanvasView',
     component: CanvasView,
     meta: { requiresAuth: true }
@@ -45,18 +46,31 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('token');
+    const isAuthenticated = !!token && !isTokenExpired(token);
 
-    const isAuthenticated = !!token;
+
+    if (!isAuthenticated && token) {
+        localStorage.removeItem('token');
+    }
 
     if (to.meta.guestOnly && isAuthenticated) {
-        return next('/dashboard');
+        return next('/canvas'); // redirect logged-in users
     }
 
     if (to.meta.requiresAuth && !isAuthenticated) {
-        return next('/login');
+        return next('/login'); // redirect non-authenticated users
     }
 
-    next();
+    // Optional: role-based route check if you store role in token
+    if (to.meta.requiredRole && isAuthenticated) {
+        const payload = parseJwt(token);
+        if (payload?.role !== to.meta.requiredRole) {
+            return next('/'); // redirect if role mismatch
+        }
+    }
+
+    next(); 
+    
 });
 
 export default router;
