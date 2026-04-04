@@ -1,22 +1,19 @@
 <template>
-  <div class="container">
-    <header class="hero">
-      <h1>Welcome to Canvas</h1>
-      <p>Manage your digital canvases and sticky notes with ease.</p>
-    </header>
-  </div>
+  <div class="background"></div>
 </template>
-<style scoped>
-.container {
-  max-width: 800px;
-  margin: 4rem auto;
-  padding: 0 1rem;
-  text-align: center;
-}
 
-.hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 1rem auto;
+<style scoped>
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/public/welcome.png');
+  background-size: contain;       
+  background-position: center;    
+  background-repeat: no-repeat;   
+  z-index: -1;
 }
 </style>

@@ -116,9 +116,8 @@ function handleLogout() {
 }
 
 .btn-logout {
-  background: #fff1f2;
   border: 1px solid #fecaca;
-  color: #e11d48;
+  color: #932a2a;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-weight: 600;
