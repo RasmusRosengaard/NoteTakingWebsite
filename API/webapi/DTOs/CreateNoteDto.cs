@@ -1,8 +1,7 @@
 namespace webapi.DTOs
 {
-    public class NoteDto
+    public class CreateNoteDto
     {
-        public int Id { get; set; }
         public string? Content { get; set; }
         public float X { get; set; }
         public float Y { get; set; }

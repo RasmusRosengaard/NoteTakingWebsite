@@ -1,82 +1,126 @@
 <template>
-  <nav>
-    <!-- Left: main navigation -->
-    <ul class="nav-left">
-      <li><router-link to="/">Front page</router-link></li>
-      <template v-if="loggedIn">
-        <li><router-link to="/notes">Notes</router-link></li>
-      </template>
-    </ul>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <router-link to="/" class="brand-link">
+          <span class="brand-text">MyNote
+          </span>
+        </router-link>
+      </div>
 
-    <!-- Right: auth links -->
-    <ul class="nav-right">
-      <template v-if="loggedIn">
-        <li><a href="#" @click.prevent="logout">Logout</a></li>
-      </template>
-      <template v-else>
-        <li><router-link to="/login">Login</router-link></li>
-        <li><router-link to="/register">Register</router-link></li>
-      </template>
-    </ul>
+      <div class="nav-links">
+        <template v-if="isLoggedIn">
+          <router-link to="/canvas" class="nav-item">Canvases</router-link>
+          <button @click="handleLogout" class="btn-logout">Logout</button>
+        </template>
+        <template v-else>
+          <router-link to="/login" class="nav-item">Login</router-link>
+          <router-link to="/register" class="btn-signup">Sign Up</router-link>
+        </template>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
-const loggedIn = ref(!!localStorage.getItem('token'));
+const isLoggedIn = ref(false);
 
+const checkAuth = () => {
+  isLoggedIn.value = !!localStorage.getItem('token');
+};
 
-watchEffect(() => {
-  loggedIn.value = !!localStorage.getItem('token');
-});
+watch(() => route.path, () => checkAuth());
+onMounted(() => checkAuth());
 
-function logout() {
+function handleLogout() {
   localStorage.removeItem('token');
-  router.replace('/'); 
-  loggedIn.value = false;
+  checkAuth();
+  router.push('/login');
 }
 </script>
 
-<style>
-nav {
+<style scoped>
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #333;
-  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
 
-nav ul {
-  list-style: none;
+.nav-container {
+  width: 100%;
+  max-width: none; /* Removed the 1400px limit */
+  margin: 0;       /* Removed the centering */
+  padding: 0 2rem; /* Keeps a small 32px gap from the edge */
   display: flex;
-  margin: 0;
-  padding: 0;
+  justify-content: space-between; 
+  align-items: center;
+  box-sizing: border-box;
 }
 
-nav li {
-  margin-right: 20px;
+.brand-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-nav li:last-child {
-  margin-right: 0;
+.brand-dot {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, var(--primary), #a855f7);
+  border-radius: 3px;
+  transform: rotate(45deg);
 }
 
-nav a {
+.brand-text {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+}
+
+.btn-signup {
+  background-color: var(--primary);
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* Optional: smaller spacing on right-side links */
-.nav-right li {
-  margin-left: 20px;
-  margin-right: 0;
+.btn-logout {
+  background: #fff1f2;
+  border: 1px solid #fecaca;
+  color: #e11d48;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
 }
 </style>

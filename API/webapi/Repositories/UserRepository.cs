@@ -1,27 +1,31 @@
 using webapi.Models;
 using webapi.Data;
 using Microsoft.EntityFrameworkCore;
-public class UserRepository : IUserRepository
+using webapi.Repositories;
+namespace webapi.Repositories
 {
-    private readonly AppDbContext _context;
-
-    public UserRepository(AppDbContext context)
+    public class UserRepository : IUserRepository
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public async Task<User?> GetByEmailAsync(string email)
-    {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-    }
+        public UserRepository(AppDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task AddAsync(User user)
-    {
-        await _context.Users.AddAsync(user);
-    }
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
 
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
+        public async Task AddAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

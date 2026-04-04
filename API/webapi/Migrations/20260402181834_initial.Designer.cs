@@ -12,8 +12,8 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260401152733_AddUserNoteManyToMany")]
-    partial class AddUserNoteManyToMany
+    [Migration("20260402181834_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,19 +25,27 @@ namespace webapi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserNote", b =>
+            modelBuilder.Entity("webapi.Models.Canvas", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("NoteId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasKey("UserId", "NoteId");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("NoteId");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("UserNotes");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Canvases");
                 });
 
             modelBuilder.Entity("webapi.Models.Note", b =>
@@ -48,16 +56,24 @@ namespace webapi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CanvasId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("X")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Y")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CanvasId");
 
                     b.ToTable("Notes");
                 });
@@ -87,33 +103,61 @@ namespace webapi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserNote", b =>
+            modelBuilder.Entity("webapi.Models.UserCanvas", b =>
                 {
-                    b.HasOne("webapi.Models.Note", "Note")
-                        .WithMany("UserNotes")
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasOne("webapi.Models.User", "User")
-                        .WithMany("UserNotes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("CanvasId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Note");
+                    b.HasKey("UserId", "CanvasId");
 
-                    b.Navigation("User");
+                    b.HasIndex("CanvasId");
+
+                    b.ToTable("UserCanvases");
                 });
 
             modelBuilder.Entity("webapi.Models.Note", b =>
                 {
-                    b.Navigation("UserNotes");
+                    b.HasOne("webapi.Models.Canvas", "Canvas")
+                        .WithMany("Notes")
+                        .HasForeignKey("CanvasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Canvas");
+                });
+
+            modelBuilder.Entity("webapi.Models.UserCanvas", b =>
+                {
+                    b.HasOne("webapi.Models.Canvas", "Canvas")
+                        .WithMany("UserCanvases")
+                        .HasForeignKey("CanvasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.User", "User")
+                        .WithMany("UserCanvases")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Canvas");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("webapi.Models.Canvas", b =>
+                {
+                    b.Navigation("Notes");
+
+                    b.Navigation("UserCanvases");
                 });
 
             modelBuilder.Entity("webapi.Models.User", b =>
                 {
-                    b.Navigation("UserNotes");
+                    b.Navigation("UserCanvases");
                 });
 #pragma warning restore 612, 618
         }

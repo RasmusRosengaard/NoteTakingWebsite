@@ -1,33 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Notes from '../Pages/Notes.vue';
+
 import Login from '../Pages/Login.vue';
 import Register from '@/Pages/Register.vue';
 import FrontPage from '@/Pages/FrontPage.vue';
+import CanvasDashboard from '../Pages/CanvasDashboard.vue';
+import CanvasView from '../Pages/CanvasView.vue'; // new page for individual canvas
 
 const routes = [
-    {
-        path: '/notes',
-        name: 'Notes',
-        component: Notes,
-        meta: { requiresAuth: true } 
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login,
-        meta: { guestOnly: true } 
-    },
-    {
-        path: '/register',
-        name: 'Register',
-        component: Register,
-        meta: { guestOnly: true }
-    },
-    {
-        path: '/',
-        name: 'FrontPage',
-        component: FrontPage
-    }
+  {
+    path: '/canvas',
+    name: 'CanvasDashboard',
+    component: CanvasDashboard,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/canvas/:canvasId',      // <--- dynamic route
+    name: 'CanvasView',
+    component: CanvasView,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { guestOnly: true } 
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: { guestOnly: true }
+  },
+  {
+    path: '/',
+    name: 'FrontPage',
+    component: FrontPage
+  }
 ];
 
 const router = createRouter({

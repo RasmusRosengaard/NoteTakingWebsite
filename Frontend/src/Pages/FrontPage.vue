@@ -1,15 +1,22 @@
 <template>
-    <Navbar></Navbar>
-    <h1>Welcome to the Front Page</h1>
-    <p>This is template application with backend authentication.</p>
-    <p>I have made this for easy setup for future projects requring a login logic.</p>
-    <p>You can run both backend API and frontend using the docker compose file.</p>
-    <p>Login logic is localStorage based for simplicity.</p>
+  <div class="container">
+    <header class="hero">
+      <h1>Welcome to Canvas</h1>
+      <p>Manage your digital canvases and sticky notes with ease.</p>
+    </header>
+  </div>
 </template>
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
 
-<script setup>
-import Navbar from '@/Components/Navbar.vue';
-
-
-
-</script>
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+</style>

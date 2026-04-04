@@ -1,19 +1,32 @@
 <template>
-    <Navbar></Navbar>
-    <div class="register-form">
-        <h1>Register</h1>
-        <input v-model="email" type="text" placeholder="Email" />
-        <input v-model="password" type="password" placeholder="Password" />
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1>Register</h1>
+      <p class="auth-subtitle">Create an account to start managing your canvases.</p>
 
-        <button @click="register">Register</button>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input v-model="email" type="email" placeholder="name@company.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input v-model="password" type="password" placeholder="Min. 8 characters" />
+      </div>
+
+      <button @click="register" class="btn-primary auth-btn">Create Account</button>
+
+      <p class="auth-footer">
+        Already have an account? <router-link to="/login">Login here</router-link>
+      </p>
     </div>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { LoginAPI, RegisterAPI } from '../API/Backend';
 import { useRouter } from 'vue-router';
-import Navbar from '@/Components/Navbar.vue';
 
 const email = ref('');
 const password = ref('');
@@ -28,8 +41,6 @@ function register() {
                 router.push('/');
             }
         })
-        .catch(err => {
-            console.error('Registration/Login failed:', err);
-        });
+        .catch(err => alert('Registration failed. Email might already be in use.'));
 }
 </script>
