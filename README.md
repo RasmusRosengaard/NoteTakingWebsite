@@ -37,6 +37,8 @@ Add the ability to toggle optional titles/headers for individual notes.
 ### Visual Assets
 Support for uploading custom cover images or selecting from a preset gallery for each canvas.
 
+### Auto saving feature
+Add support for autosaving, should be auto enabled.
 ---
 
 ## Dashboard & Organization
@@ -49,3 +51,9 @@ Sort canvases by name (alphabetical) or by the number of notes they contain.
 
 ### Metadata Indexing
 Improved search functionality to scan note content across the dashboard.
+
+## Docker, deployment CI/CD
+
+### Containerize both frontend and backend for easy setup
+
+### Find hosting for backend, database and frontend. 

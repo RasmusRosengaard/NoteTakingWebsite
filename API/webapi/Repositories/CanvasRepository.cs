@@ -57,7 +57,6 @@ public class CanvasRepository : ICanvasRepository
 
         if (canvas == null) return;
 
-        // 1. Delete notes not present in the incoming list
         var incomingIds = incomingNotes.Select(n => n.Id).Where(id => id > 0).ToList();
         var notesToRemove = canvas.Notes.Where(n => !incomingIds.Contains(n.Id)).ToList();
         _dbContext.Notes.RemoveRange(notesToRemove);

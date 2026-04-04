@@ -61,10 +61,9 @@ const loading = ref(true);
 const isSaving = ref(false);
 const maxZIndex = ref(100);
 
-// Bring note to front on click
+
 const bringToFront = (note) => { maxZIndex.value++; note.zIndex = maxZIndex.value; };
 
-// Initialize draggable and resizable notes
 const setInteractable = (el, note) => {
   if (!el) return;
   interact(el)
@@ -83,7 +82,6 @@ const setInteractable = (el, note) => {
     });
 };
 
-// Load canvas data
 onMounted(async () => {
   const token = localStorage.getItem('token');
   try {
@@ -100,7 +98,7 @@ onMounted(async () => {
   }
 });
 
-// Add a new note locally
+
 function addNewNoteLocal() {
   maxZIndex.value++;
   canvas.value.notes.push({
@@ -111,12 +109,12 @@ function addNewNoteLocal() {
   });
 }
 
-// Remove note locally
+
 function removeNoteLocal(note) {
   canvas.value.notes = canvas.value.notes.filter(n => note.id ? n.id !== note.id : n.tempId !== note.tempId);
 }
 
-// Save all notes
+// needs to implement auto save
 async function saveAllNotes() {
   if (isSaving.value) return;
   const token = localStorage.getItem('token');
@@ -131,7 +129,7 @@ async function saveAllNotes() {
   }
 }
 
-// Navigate back to dashboard
+
 function goBack() {
   router.push('/canvas');
 }
