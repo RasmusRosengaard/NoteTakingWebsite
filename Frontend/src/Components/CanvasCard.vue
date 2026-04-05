@@ -6,7 +6,7 @@
     >
       <div class="card-icon">📁</div>
       <h3>{{ canvas.title }}</h3>
-      <span class="card-link">Open Project →</span>
+      <span class="card-link">Click to Open → </span>
     </router-link>
 
     <button

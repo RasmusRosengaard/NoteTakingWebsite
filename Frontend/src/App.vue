@@ -20,13 +20,13 @@ onMounted(() => {
 
 <style>
 :root {
-  --primary: #6366f1;         /* Indigo 500 */
-  --primary-hover: #4f46e5;   /* Indigo 600 */
-  --bg-app: #f1f5f9;         /* Slate 100 - Soft blue-gray background */
-  --bg-card: #ffffff;        /* Pure white for cards/notes */
-  --text-main: #1e293b;      /* Slate 800 */
-  --text-muted: #64748b;     /* Slate 500 */
-  --border: #e2e8f0;         /* Slate 200 */
+  --primary: #6366f1;        
+  --primary-hover: #4f46e5;   
+  --bg-app: #f1f5f9;         
+  --bg-card: #ffffff;        
+  --text-main: #1e293b;      
+  --text-muted: #64748b;   
+  --border: #e2e8f0;        
   --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 

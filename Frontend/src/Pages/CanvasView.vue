@@ -61,9 +61,6 @@ const loading = ref(true);
 const isSaving = ref(false);
 const maxZIndex = ref(100);
 
-// possibly make the content html and make user controls for titles, colors, fat text, text size etc.
-// content should render as html with v-html instead.
-// maybe store as json
 const bringToFront = (note) => { maxZIndex.value++; note.zIndex = maxZIndex.value; };
 
 const setInteractable = (el, note) => {

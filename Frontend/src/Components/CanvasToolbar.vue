@@ -38,12 +38,9 @@ const router = useRouter();
 const onAddNote = () => emit('add-note');
 const onSave = () => emit('save');
 
-/**
- * Save before navigating back
- */
 const handleBack = async () => {
-  await emit('save');   // trigger save in parent
-  emit('back');         // notify parent to navigate
+  await emit('save');  
+  emit('back');         
 };
 </script>
 
